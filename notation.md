@@ -20,11 +20,11 @@ For example, it might be the case that, given an input of size $n$, an algorithm
 
 $$f(n) = n^2 + \frac{1}{2}n $$
 
-Or, it might be the case that, given an input of size $n$, an algorithm we design will need $n\,lg\,n + 2n$ basic operations to compute a solution. In this case, we model the runtime of our algorithm using this $f$:
+Or, it might be the case that, given an input of size $n$, an algorithm we design will need $n \  lg \  n + 2n$ basic operations to compute a solution. In this case, we model the runtime of our algorithm using this $f$:
 
-$$f(n) = n\,lg\,n + 2n $$
+$$f(n) = n \  lg \   n + 2n $$
 
-Let's say, for purposes of exposition, that the two different algorithms modeled by these time functions both solve the same computational problem. Which one should we implement? Which one should we add to our [Killer App](https://en.wikipedia.org/wiki/Killer_application)? And do our $f$s help us decide?
+Let's say, for purposes of exposition, that the two different algorithms modeled by these time functions both solve the same computational problem. Which one should we implement? Which one should we add to our [Killer App](https://en.wikipedia.org/wiki/Killer_application)? And do our $`f`$s help us decide?
 
 > ### Sidebar: What do you mean, "size of the input"?
 > &#x21F0; The phrase "size of the input" is just vague enough to be useful and just vague enough to be confusing. The mystery is a result of the fact that we are attempting to capture a characteristic of an instance of a computational problem so that it is applicable to as many algorithms as possible. When I was learning to analyze algorithms, some examples really helped me: For an algorithm that sorts lists of inputs, the "size of the input" is the length of the list of items to sort; For an algorithm that factors prime numbers, the "size of the input" is the number of digits in the number to factor; For an algorithm that predicts the weather in the future, the "size of the input" might be the number of days from now when we are concerned about precipitation. Notice a common theme: As the "size of the input" grows, the instance of the computational problem gets harder and harder.
@@ -49,7 +49,7 @@ Going back to the context of measuring the runtime of an algorithm, think about 
 
 Because it will be common for our algorithm-runtime-modeling functions to be divergent, in order to decide which one is better[^better] will mean that we have to compare two functions whose magnitudes go to infinity? Comparing infinities? 
 
-Big-$O$ no!
+Big-$`O`$ no!
 
 Are we stuck or do we just have to use calculus? Neither one sounds particuarly enjoyable, but at least one gets us to an answer. We will need tools that help us _somehow_ compare whether the magnitude of one function approaches infinity faster than another -- tools to analyze the order of growth!
 
@@ -63,13 +63,13 @@ And now we are back to _order of growth_ or _order of rate of growth_ and making
 
 Intuitively we all "know" what the term "order" means -- it means that we are waving our hands and omitting some details without losing what is important. But, what is the _real_ definition when we see it used in _order of growth_ in the textbook and when we are analyzing algorithms?
 
-Like most things in computer science, all roads lead back to Knuth. In Volume 1[^v1] of his (still incomplete) tomb on computer science, Knuth gives a little history of the Big-$O$ notation:
+Like most things in computer science, all roads lead back to Knuth. In Volume 1[^v1] of his (still incomplete) tomb on computer science, Knuth gives a little history of the Big-$`O`$ notation:
 
 > A very convenient notation for dealing with approximations was introduced by P. Bachmann in the book _Analytische Zahlentheorie_ in 1892. This "big-oh" notation ...
 
 [^v1]: D. E. Knuth, _The Art of Computer Programming_. Addison-Wesley Professional, 1997.
 
-It's pretty neat that we could[^bachmann] (if we spoke German),[^google] find our way all the way back to the source of this odd notation. After his first use of the Big-$O$ notation and his application of it to the analysis of the runtime of computer algorithms, Knuth wrote a letter to the editor in 1976 advocating for $\Theta$ and $\Omega$:
+It's pretty neat that we could[^bachmann] (if we spoke German),[^google] find our way all the way back to the source of this odd notation. After his first use of the Big-$`O`$ notation and his application of it to the analysis of the runtime of computer algorithms, Knuth wrote a letter to the editor in 1976 advocating for $\Theta$ and $\Omega$:
 
 > Sometimes we also need a corresponding notation for lower-bounded functions, i.e., those functions which are at least as large as a constant times $f(n)$ for all large $n$.[^sigact]
 
@@ -77,7 +77,7 @@ It's pretty neat that we could[^bachmann] (if we spoke German),[^google] find ou
 
 [^google]: But, Google does and I tried to translate parts of it -- really, _really_ cool!
 
-What do these letters have to do with our attempt at finding a better definition for _order of growth_? In his letter, as Knuth gives the precise definitions for Big-$O$, Big-$\Omega$ and Big-$\Theta$ that we have seen in class, he says that each can be "read" as 
+What do these letters have to do with our attempt at finding a better definition for _order of growth_? In his letter, as Knuth gives the precise definitions for Big-$`O`$, Big-$`\Omega`$ and Big-$`\Theta`$ that we have seen in class, he says that each can be "read" as 
 
 > order at most ...
 
@@ -87,7 +87,7 @@ and
 
 > order exactly ...
 
-I read these statements as Knuth saying that Big-$O$, Big-$\Omega$ and Big-$\Theta$ _are_ the definitions of the term _order of growth_. That reading is supported by the fact that Bachmann chose the $O$ in Big-$O$ to stand for the "o" in "order of approximation". 
+I read these statements as Knuth saying that Big-$`O`$, Big-$`\Omega`$ and Big-$`\Theta`$ _are_ the definitions of the term _order of growth_. That reading is supported by the fact that Bachmann chose the $O$ in Big-$`O`$ to stand for the "o" in "order of approximation". 
 
 Whew. I think we got to the bottom of _that_ mystery.
 
