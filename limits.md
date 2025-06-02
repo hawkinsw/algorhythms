@@ -83,23 +83,23 @@ $$ f(n) = 2n^3 + {1/2}n $$
 
 that describes how fast our new, world-changing algorithm runs. 
 
-By now, we are very comfortable saying that $f(n) \in O(2^n)$, $f(n) \in \Omega (n^3)$ and $f(n) \in \Theta (lg \ n)$, even if finding all those $c$ s and $n_0$ s is a pain in the butt.
+By now, we are very comfortable saying that $f(n) \in O(2^n)$, $f(n) \in \Theta (n^3)$ and $f(n) \in \Omega (lg \ n)$, even if finding all those $c$ s and $n_0$ s is a pain in the butt.
 
 [We have also seen](./notation.md) that it is very common that the functions we use to model the runtime of our algorithms are divergent. If we could write that one functions goes to $\infty$ faster, slower or the same as a model function, we could use that as a different way to say what we have said before by finding $c$ s and $n_0$ s.
 
-> **Note**: To make the explication a little easier, for the remainder of this section we will technically be describing Little-$o$, Little-$\theta$ and Little-$\omega$ -- the sets of functions that grow slower than, faster than (_not_ inclusive) and the same as a model function!
+> **Note**: To make the explication a little easier, for the remainder of this section we will technically be describing Little-$o$, Little-$\omega$ and Little-$\theta$ -- the sets of functions that grow slower than, faster than (_not_ inclusive) and the same as a model function!
 
-For Little-$`o`$ we would want the model function ($g(n)$) to go to $\infty$ at faster than the function that models the runtime of our algorithm:
+For Little-$`o`$ we would want the model function ($g(n)$) to go to $\infty$ faster than the function that models the runtime of our algorithm:
 
-$$ \lim_{x\to\infty} \frac{f(n)}{g(n)} = 0 $$
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = 0 $$
 
-For Little-$\theta$ we would want the model function ($g(n)$) to go to $\infty$ slower than the function that models the runtime of our algorithm:
+For Little-$\omega$ we would want the model function ($g(n)$) to go to $\infty$ slower than the function that models the runtime of our algorithm:
 
-$$ \lim_{x\to\infty} \frac{f(n)}{g(n)} = \infty $$
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = \infty $$
 
-Finally, for Little-$\omega$ we would want the model function ($g(n)$) to go to $\infty$ at some constant multiple of the function that models the runtime of our algorithm:
+Finally, for Little-$\theta$ we would want the model function ($g(n)$) to go to $\infty$ at some constant multiple of the function that models the runtime of our algorithm:
 
-$$ \lim_{x\to\infty} \frac{f(n)}{g(n)} = c $$
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = c $$
 
 where $c$ is some constant!
 
@@ -115,9 +115,9 @@ is in $o(3^n)$ ?
 
 We will have to show that 
 
-$$ \lim_{x\to\infty} \frac{ 2n^3 + {1/2}n }{3^n} = 0 $$
+$$ \lim_{n\to\infty} \frac{ 2n^3 + {1/2}n }{3^n} = 0 $$
 
-Okay! Step one is to remember L'Hopital's Rule: If 
+Okay! Step one is to remember [L'Hôpital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule): If 
 
 $$ \lim_{n\to\infty} f(n) = \infty $$
 
@@ -131,36 +131,82 @@ $$ \lim_{x\to\infty} \frac{f(n)}{g(n)} = \lim_{x\to\infty} \frac{f'(n)}{g'(n)} $
 
 We will calculate $g'(n)$:
 
-$$ g'(n) = n3^{n-1}$$
+$$ g'(n) = 3^n \ ln \ 3$$
 
 and $f'(n)$:
 
-$$ f'(n) = 6n^2$$
+$$ f'(n) = 6n^2 + \frac{1}{2} $$
 
 Well, it looks like L'Hopital's Rule still applies. Let's do it again:
 
+$$ g''(n) = 3^n \ ln^2 \ 3 $$
 
-$$ g''(n) = n'3^{n-1} + n(3^{n-1})' = 3^{n-1} + n3^{n-1}ln \ 3 = 3^{n-1}(1 + n \ ln \ 3) $$
-
+and
 
 $$ f''(n) = 12n $$
 
-If we assume that n > 1, then
+And, one more time!
 
-$$ \frac{g''(n)}{f''(n)} = \frac{12}{3^{n-2}(1 + n \ ln \ 3)} $$
+$$ g'''(n) = 3^n \ ln^3 \ 3 $$
 
-and, because 
+and
 
+$$ f'''(n) = 12 $$
 
-$$ \lim_{n\to\infty} 3^{n-2}(1 + n \ ln \ 3) = \infty $$
+Whew. Because 
 
-we have found that 
+$$ g'''(n) = 3^n \ ln^3 \ 3 $$
 
-$$ \lim_{x\to\infty} \frac{ 2n^3 + {1/2}n }{3^n} = 0 $$
+and the numerator is a constant, we have found that 
+
+$$ \lim_{n\to\infty} \frac{ 2n^3 + {1/2}n }{3^n} = 0 $$
 
 and can say that 
 
 $$ 2n^3 + {1/2}n \in o(3^n) $$
+
+
+## Facts, But Bigger
+
+Recall that the facts of limits that we expressed earlier were actually about Little-$o$, Little-$\theta$ and Little-$\omega$. Could we rewrite them for the ones that we know better? Yes, but we'll have to use the "negative".
+
+For Big-$`O`$ we would want the model function ($g(n)$) to go to $\infty$ at least as fast as the function that models the runtime of our algorithm. So, 
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = 0 $$
+
+or 
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = c $$
+
+are okay. What's not?
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = \infty $$
+
+So, for $f(n) \in O(g(n))$, we would have to prove:
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} \ne \infty $$
+
+For Big-$\Omega$ we would want the model function ($g(n)$) to go to $\infty$ no faster than the function that models the runtime of our algorithm:
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = \infty $$
+
+or
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = c $$
+
+What cannot happen?
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} = 0 $$
+
+So, for $f(n) \in \Omega(g(n))$, we would have to prove:
+
+$$ \lim_{n\to\infty} \frac{f(n)}{g(n)} \ne 0 $$
+
+Last, but not least, Big-$\Theta$. The good news for Big-$\Theta$ is that there is no change: So, for $f(n) \in \Theta(g(n))$, we would have to prove:
+
+$$ \lim_{x\to\infty} \frac{f(n)}{g(n)} = c $$
+
+
 
 ## Put the Rhythm In Algorithms
 
